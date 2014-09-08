@@ -1,5 +1,5 @@
 {
-    "name": "costa-rico/yii2-images",
+    "name": "7GreenGo/yii2-upload",
     "description": "yii2 images module for storing images",
     "keywords": ["yii2", "images", "store", "images store", "yii2-images", "Costa Rico"],
     "type": "yii2-extension",
@@ -7,8 +7,8 @@
 
     "authors": [
         {
-            "name": "Costa Rico",
-            "email": "zetogo@gmail.com"
+            "name": "7GreenGo",
+            "email": "GreenGo@gmail.com"
         }
     ],
     "minimum-stability": "dev",
@@ -27,7 +27,7 @@
     },
     "autoload": {
         "psr-4": {
-            "rico\\yii2images\\": ""
+            "7GreenGo\\yii2images\\": ""
         }
     }
 }

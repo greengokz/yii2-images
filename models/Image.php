@@ -37,7 +37,7 @@ class Image extends \yii\db\ActiveRecord
 
         $dirToRemove = $this->getModule()->getCachePath().DIRECTORY_SEPARATOR.$subDir;
 
-        if(preg_match('/'.preg_quote($this->model_name, '/').DIRECTORY_SEPARATOR, $dirToRemove)){
+        if(preg_match('/'.preg_quote($this->model_name, '/').'/', $dirToRemove)){
             BaseFileHelper::removeDirectory($dirToRemove);
 
         }

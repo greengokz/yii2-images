@@ -82,7 +82,7 @@ Installation
 Add Yii2-user to the require section of your composer.json file:
    {
         "require": {
-            "costa-rico/yii2-images": "dev-master"
+            "7greengo/yii2-images": "dev-master"
         }
    }
 run
@@ -90,12 +90,12 @@ run
   php composer.phar update
 run migrate
 
-php yii migrate/up --migrationPath=@vendor/costa-rico/yii2-images/migrations
+php yii migrate/up --migrationPath=@vendor/7greengo/yii2-images/migrations
 setup module
 
 'modules' => [
         'yii2images' => [
-            'class' => 'rico\yii2images\Module',
+            'class' => 'greengo\yii2images\Module',
             //be sure, that permissions ok 
             //if you cant avoid permission errors you have to create "images" folder in web root manually and set 777 permissions
             'imagesStorePath' => 'images/store', //path to origin images
@@ -110,7 +110,7 @@ attach behaviour to your model (be sure that your model has "id" property)
     {
         return [
             'image' => [
-                'class' => 'rico\yii2images\behaviors\ImageBehave',
+                'class' => 'greengo\yii2images\behaviors\ImageBehave',
             ]
         ];
     }

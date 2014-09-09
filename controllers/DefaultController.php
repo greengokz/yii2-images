@@ -1,6 +1,6 @@
 <?php
 
-namespace rico\yii2images\controllers;
+namespace greengo\yii2images\controllers;
 
 use yii\web\Controller;
 

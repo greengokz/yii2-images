@@ -6,18 +6,18 @@
  * Time: 0:20
  */
 
-namespace rico\yii2images;
+namespace greengo\yii2images;
 
 
 trait ModuleTrait
 {
     /**
-     * @var null|\rico\yii2images\Module
+     * @var null|\greengo\yii2images\Module
      */
     private $_module;
 
     /**
-     * @return null|\rico\yii2images\Module
+     * @return null|\greengo\yii2images\Module
      */
     protected function getModule()
     {

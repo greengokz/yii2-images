@@ -9,7 +9,7 @@
  * override methods
  */
 
-namespace greengo\yii2images\models;
+namespace greengokz\yii2images\models;
 
 /**
  * TODO: check path to save and all image method for placeholder

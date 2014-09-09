@@ -12,13 +12,13 @@
  * @property string $url_alias
  */
 
-namespace greengo\yii2images\models;
+namespace greengokz\yii2images\models;
 
 use Yii;
 use yii\base\Exception;
 use yii\helpers\Url;
 use yii\helpers\BaseFileHelper;
-use \greengo\yii2images\ModuleTrait;
+use \greengokz\yii2images\ModuleTrait;
 
 
 

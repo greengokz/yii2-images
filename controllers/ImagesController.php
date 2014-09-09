@@ -6,12 +6,12 @@
  * Time: 15:35
  */
 
-namespace greengo\yii2images\controllers;
+namespace greengokz\yii2images\controllers;
 
 use yii\web\Controller;
 use yii;
-use greengo\yii2images\models\Image;
-use \greengo\yii2images\ModuleTrait;
+use greengokz\yii2images\models\Image;
+use \greengokz\yii2images\ModuleTrait;
 
 class ImagesController extends Controller
 {

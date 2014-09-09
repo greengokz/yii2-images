@@ -1,11 +1,11 @@
 <?php
 
-namespace greengo\yii2images;
+namespace greengokz\yii2images;
 
 
-use greengo\yii2images\models\PlaceHolder;
+use greengokz\yii2images\models\PlaceHolder;
 use yii;
-use greengo\yii2images\models\Image;
+use greengokz\yii2images\models\Image;
 
 class Module extends \yii\base\Module
 {
@@ -15,7 +15,7 @@ class Module extends \yii\base\Module
 
     public $graphicsLibrary = 'GD';
 
-    public $controllerNamespace = 'greengo\yii2images\controllers';
+    public $controllerNamespace = 'greengokz\yii2images\controllers';
 
     public $placeHolderPath;
 

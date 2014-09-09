@@ -6,18 +6,18 @@
  * Time: 0:20
  */
 
-namespace greengo\yii2images;
+namespace greengokz\yii2images;
 
 
 trait ModuleTrait
 {
     /**
-     * @var null|\greengo\yii2images\Module
+     * @var null|\greengokz\yii2images\Module
      */
     private $_module;
 
     /**
-     * @return null|\greengo\yii2images\Module
+     * @return null|\greengokz\yii2images\Module
      */
     protected function getModule()
     {

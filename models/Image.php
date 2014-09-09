@@ -5,11 +5,11 @@
  * This is the model class for table "image".
  *
  * @property integer $id
- * @property string $filePath
- * @property integer $itemId
- * @property integer $isMain
- * @property string $modelName
- * @property string $urlAlias
+ * @property string $file_path
+ * @property integer $item_id
+ * @property integer $is_main
+ * @property string $model_name
+ * @property string $url_alias
  */
 
 namespace rico\yii2images\models;
@@ -36,7 +36,7 @@ class Image extends \yii\db\ActiveRecord
 
         $dirToRemove = $this->getModule()->getCachePath().DIRECTORY_SEPARATOR.$subDir;
 
-        if(preg_match('/'.preg_quote($this->modelName, '/').DIRECTORY_SEPARATOR, $dirToRemove)){
+        if(preg_match('/'.preg_quote($this->model_name, '/').DIRECTORY_SEPARATOR, $dirToRemove)){
             BaseFileHelper::removeDirectory($dirToRemove);
 
         }
@@ -53,8 +53,8 @@ class Image extends \yii\db\ActiveRecord
         $urlSize = ($size) ? '_'.$size : '';
         $url = Url::toRoute([
             '/'.$this->getModule()->id.'/images/image-by-item-and-alias',
-            'item' => $this->modelName.$this->itemId,
-            'dirtyAlias' =>  $this->urlAlias.$urlSize.'.'.$this->getExtension()
+            'item' => $this->model_name.$this->item_id,
+            'dirtyAlias' =>  $this->url_alias.$urlSize.'.'.$this->getExtension()
         ]);
 
         return $url;
@@ -67,18 +67,18 @@ class Image extends \yii\db\ActiveRecord
 
         $origin = $this->getPathToOrigin();
 
-        $filePath = $base.DIRECTORY_SEPARATOR.
-            $sub.DIRECTORY_SEPARATOR.$this->urlAlias.$urlSize.'.'.pathinfo($origin, PATHINFO_EXTENSION);;
+        $file_path = $base.DIRECTORY_SEPARATOR.
+            $sub.DIRECTORY_SEPARATOR.$this->url_alias.$urlSize.'.'.pathinfo($origin, PATHINFO_EXTENSION);;
 
-        if(!file_exists($filePath)){
+        if(!file_exists($file_path)){
             $this->createVersion($origin, $size);
 
-            if(!file_exists($filePath)){
+            if(!file_exists($file_path)){
                 throw new \Exception('Problem with image creating.');
             }
         }
 
-        return $filePath;
+        return $file_path;
     }
 
     public function getContent($size = false){
@@ -89,9 +89,9 @@ class Image extends \yii\db\ActiveRecord
 
         $base = $this->getModule()->getStorePath();
 
-        $filePath = $base.DIRECTORY_SEPARATOR.$this->filePath;
+        $file_path = $base.DIRECTORY_SEPARATOR.$this->file_path;
 
-        return $filePath;
+        return $file_path;
     }
 
     public function getSizesWhen($sizeString){
@@ -129,13 +129,13 @@ class Image extends \yii\db\ActiveRecord
 
     public function createVersion($imagePath, $sizeString = false)
     {
-        if(strlen($this->urlAlias)<1){
-            throw new \Exception('Image without urlAlias!');
+        if(strlen($this->url_alias)<1){
+            throw new \Exception('Image without url_alias!');
         }
 
         $cachePath = $this->getModule()->getCachePath();
         $subDirPath = $this->getSubDur();
-        $fileExtension =  pathinfo($this->filePath, PATHINFO_EXTENSION);
+        $fileExtension =  pathinfo($this->file_path, PATHINFO_EXTENSION);
 
         if($sizeString){
             $sizePart = '_'.$sizeString;
@@ -143,7 +143,7 @@ class Image extends \yii\db\ActiveRecord
             $sizePart = '';
         }
 
-        $pathToSave = $cachePath.'/'.$subDirPath.'/'.$this->urlAlias.$sizePart.'.'.$fileExtension;
+        $pathToSave = $cachePath.'/'.$subDirPath.'/'.$this->url_alias.$sizePart.'.'.$fileExtension;
 
         BaseFileHelper::createDirectory(dirname($pathToSave), 0777, true);
 
@@ -241,17 +241,17 @@ class Image extends \yii\db\ActiveRecord
     }
 
 
-    public function setMain($isMain = true){
-        if($isMain){
-            $this->isMain = 1;
+    public function setMain($is_main = true){
+        if($is_main){
+            $this->is_main = 1;
         }else{
-            $this->isMain = 0;
+            $this->is_main = 0;
         }
 
     }
 
     protected function getSubDur(){
-        return $this->modelName. 's/' . $this->modelName.$this->itemId;
+        return $this->model_name. 's/' . $this->model_name.$this->item_id;
     }
 
 
@@ -270,10 +270,10 @@ class Image extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['filePath', 'itemId', 'modelName', 'urlAlias'], 'required'],
-            [['itemId', 'isMain'], 'integer'],
-            [['filePath', 'urlAlias'], 'string', 'max' => 400],
-            [['modelName'], 'string', 'max' => 150]
+            [['file_path', 'item_id', 'model_name', 'url_alias'], 'required'],
+            [['item_id', 'is_main'], 'integer'],
+            [['file_path', 'url_alias'], 'string', 'max' => 400],
+            [['model_name'], 'string', 'max' => 150]
         ];
     }
 
@@ -284,11 +284,11 @@ class Image extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'filePath' => 'File Path',
-            'itemId' => 'Item ID',
-            'isMain' => 'Is Main',
-            'modelName' => 'Model Name',
-            'urlAlias' => 'Url Alias',
+            'file_path' => 'File Path',
+            'item_id' => 'Item ID',
+            'is_main' => 'Is Main',
+            'model_name' => 'Model Name',
+            'url_alias' => 'Url Alias',
         ];
     }
 }

@@ -32,21 +32,21 @@ class Module extends \yii\base\Module
         $alias = $params['alias'];
         $size = $params['size'];
 
-        $itemId = preg_replace('/[^0-9]+/', '', $item);
-        $modelName = preg_replace('/[0-9]+/', '', $item);
+        $item_id = preg_replace('/[^0-9]+/', '', $item);
+        $model_name = preg_replace('/[0-9]+/', '', $item);
 
 
         //Lets get image
         $image = Image::find()
             ->where([
-                'modelName' => $modelName,
-                'itemId' => $itemId,
-                'urlAlias' => $alias
+                'model_name' => $model_name,
+                'item_id' => $item_id,
+                'url_alias' => $alias
             ])
-            /*     ->where('modelName = :modelName AND itemId = :itemId AND urlAlias = :alias',
+            /*     ->where('model_name = :model_name AND item_id = :item_id AND url_alias = :alias',
                      [
-                         ':modelName' => $modelName,
-                         ':itemId' => $itemId,
+                         ':model_name' => $model_name,
+                         ':item_id' => $item_id,
                          ':alias' => $alias
                      ])*/
             ->one();
@@ -72,8 +72,8 @@ class Module extends \yii\base\Module
 
     public function getModelSubDir($model)
     {
-        $modelName = $this->getShortClass($model);
-        $modelDir = $modelName . 's/' . $modelName . $model->id;
+        $model_name = $this->getShortClass($model);
+        $modelDir = $model_name . 's/' . $model_name . $model->id;
 
         return $modelDir;
     }

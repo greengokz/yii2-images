@@ -37,7 +37,7 @@ class ImageBehave extends Behavior
      * @return bool|Image
      * @throws \Exception
      */
-    public function attachImage($absolutePath, $isMain = false)
+    public function attachImage($absolutePath, $is_main = false)
     {
         if(!preg_match('#http#', $absolutePath)){
             if (!file_exists($absolutePath)) {
@@ -73,12 +73,12 @@ class ImageBehave extends Behavior
 
 
         $image = new models\Image;
-        $image->itemId = $this->owner->id;
-        $image->filePath = $pictureSubDir . '/' . $pictureFileName;
-        $image->modelName = $this->getModule()->getShortClass($this->owner);
+        $image->item_id = $this->owner->id;
+        $image->file_path = $pictureSubDir . '/' . $pictureFileName;
+        $image->model_name = $this->getModule()->getShortClass($this->owner);
 
 
-        $image->urlAlias = $this->getAlias($image);
+        $image->url_alias = $this->getAlias($image);
 
         if(!$image->save()){
             return false;
@@ -99,7 +99,7 @@ class ImageBehave extends Behavior
             or
             $img == null
             or
-            $isMain
+            $is_main
         ){
             $this->setMainImage($image);
         }
@@ -115,13 +115,13 @@ class ImageBehave extends Behavior
      */
     public function setMainImage($img)
     {
-        if ($this->owner->id != $img->itemId) {
+        if ($this->owner->id != $img->item_id) {
             throw new \Exception('Image must belong to this model');
         }
         $counter = 1;
         /* @var $img Image */
         $img->setMain(true);
-        $img->urlAlias = $this->getAliasString() . '-' . $counter;
+        $img->url_alias = $this->getAliasString() . '-' . $counter;
         $img->save();
 
 
@@ -135,7 +135,7 @@ class ImageBehave extends Behavior
             }
 
             $allImg->setMain(false);
-            $allImg->urlAlias = $this->getAliasString() . '-' . $counter;
+            $allImg->url_alias = $this->getAliasString() . '-' . $counter;
             $allImg->save();
         }
 
@@ -175,7 +175,7 @@ class ImageBehave extends Behavior
 
         $imageQuery = Image::find()
             ->where($finder);
-        $imageQuery->orderBy(['isMain' => SORT_DESC, 'id' => SORT_ASC]);
+        $imageQuery->orderBy(['is_main' => SORT_DESC, 'id' => SORT_ASC]);
 
         $imageRecords = $imageQuery->all();
         if(!$imageRecords){
@@ -191,10 +191,10 @@ class ImageBehave extends Behavior
      */
     public function getImage()
     {
-        $finder = $this->getImagesFinder(['isMain' => 1]);
+        $finder = $this->getImagesFinder(['is_main' => 1]);
         $imageQuery = Image::find()
             ->where($finder);
-        $imageQuery->orderBy(['isMain' => SORT_DESC, 'id' => SORT_ASC]);
+        $imageQuery->orderBy(['is_main' => SORT_DESC, 'id' => SORT_ASC]);
 
         $img = $imageQuery->one();
         if(!$img){
@@ -232,7 +232,7 @@ class ImageBehave extends Behavior
 
         $storePath = $this->getModule()->getStorePath();
 
-        $fileToRemove = $storePath . DIRECTORY_SEPARATOR . $img->filePath;
+        $fileToRemove = $storePath . DIRECTORY_SEPARATOR . $img->file_path;
         if (preg_match('@\.@', $fileToRemove) and is_file($fileToRemove)) {
             unlink($fileToRemove);
         }
@@ -242,8 +242,8 @@ class ImageBehave extends Behavior
     private function getImagesFinder($additionWhere = false)
     {
         $base = [
-            'itemId' => $this->owner->id,
-            'modelName' => $this->getModule()->getShortClass($this->owner)
+            'item_id' => $this->owner->id,
+            'model_name' => $this->getModule()->getShortClass($this->owner)
         ];
 
         if ($additionWhere) {

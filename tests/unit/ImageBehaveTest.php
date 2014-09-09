@@ -68,11 +68,11 @@ class ImageBehaveTest extends DbTestCase
 
         $columns = [
             'id' => 'pk',
-            'filePath' => 'VARCHAR(400) NOT NULL',
-            'itemId' => 'int(20) NOT NULL',
-            'isMain' => 'int(1)',
-            'modelName' => 'VARCHAR(150) NOT NULL',
-            'urlAlias' => 'VARCHAR(400) NOT NULL',
+            'file_path' => 'VARCHAR(400) NOT NULL',
+            'item_id' => 'int(20) NOT NULL',
+            'is_main' => 'int(1)',
+            'model_name' => 'VARCHAR(150) NOT NULL',
+            'url_alias' => 'VARCHAR(400) NOT NULL',
         ];
         Yii::$app->getDb()->createCommand()->createTable('image', $columns)->execute();
 
@@ -127,13 +127,13 @@ class ImageBehaveTest extends DbTestCase
 
         //Check db record
         $imageRecord = Image::find()->where([
-            'itemId' => $this->model->id,
-            'modelName' => 'ActiveRecordImage'
+            'item_id' => $this->model->id,
+            'model_name' => 'ActiveRecordImage'
         ])->one();
 
         //var_dump($imageRecord);die;
-        $this->assertTrue($imageRecord->isMain == 1);
-        $this->assertTrue($imageRecord->filePath == 'ActiveRecordImages/ActiveRecordImage1/' . $file);
+        $this->assertTrue($imageRecord->is_main == 1);
+        $this->assertTrue($imageRecord->file_path == 'ActiveRecordImages/ActiveRecordImage1/' . $file);
 
     }
 
@@ -157,7 +157,7 @@ class ImageBehaveTest extends DbTestCase
 
 
         //Check is it first image main
-        $this->assertTrue($images[0]->isMain == 1);
+        $this->assertTrue($images[0]->is_main == 1);
 
     }
 
@@ -180,7 +180,7 @@ class ImageBehaveTest extends DbTestCase
         $this->assertTrue(get_class($image) == 'rico\yii2images\models\Image');
 
         //Check is it first image main
-        $this->assertTrue($image->isMain == 1);
+        $this->assertTrue($image->is_main == 1);
 
     }
 
@@ -215,8 +215,8 @@ class ImageBehaveTest extends DbTestCase
 
         //Check db record removed
         $imageRecord = Image::find()->where([
-            'itemId' => $this->model->id,
-            'modelName' => 'ActiveRecordImage'
+            'item_id' => $this->model->id,
+            'model_name' => 'ActiveRecordImage'
         ])->one();
 
         $this->assertTrue($imageRecord == NULL);
@@ -240,7 +240,7 @@ class ImageBehaveTest extends DbTestCase
         $this->model->attachImage(__DIR__ . '/data/testPicture.jpg');
         $img = $this->model->getImage();
 
-        $this->assertTrue($img->isMain == 1);
+        $this->assertTrue($img->is_main == 1);
 
         //Remember main image id
         $oldMainImageId = $img->id;
@@ -252,7 +252,7 @@ class ImageBehaveTest extends DbTestCase
 
         $images = $this->model->getImages();
         foreach ($images as $i) {
-            if ($i->isMain == 0) {
+            if ($i->is_main == 0) {
                 $this->assertTrue($i->id != $newMainImage->id);
             } else {
                 $this->assertTrue($i->id == $newMainImage->id);
@@ -273,8 +273,8 @@ class ImageBehaveTest extends DbTestCase
         $this->model->attachImage(__DIR__ . '/data/testPicture.jpg');
         $anotherImage =  $anotherModel->attachImage(__DIR__ . '/data/testPicture.jpg');
 
-        $this->assertTrue($anotherImage->modelName == 'ActiveRecordImage2');
-        $this->assertTrue($img->modelName == 'ActiveRecordImage');
+        $this->assertTrue($anotherImage->model_name == 'ActiveRecordImage2');
+        $this->assertTrue($img->model_name == 'ActiveRecordImage');
 
         $this->assertTrue(count($anotherModel->getImages())==1);
         $this->assertTrue(count($this->model->getImages())>1);

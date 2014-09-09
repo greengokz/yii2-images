@@ -24,6 +24,7 @@ class PlaceHolder extends Image
     private $item_id = '';
     public $file_path = 'placeHolder.png';
     public $url_alias = 'placeHolder';
+    public $is_image = false;
 
 
     /*  public function getUrl($size = false){

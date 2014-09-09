@@ -28,6 +28,7 @@ class Image extends \yii\db\ActiveRecord
 
 
     private $helper = false;
+    public $is_image = true;
 
 
 
